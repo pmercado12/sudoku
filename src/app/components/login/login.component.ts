@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   private ingresar(){
     //TODO guardar en la base y setear la variable de session
-    this.router.navigate(['/sudoku']);
+    this.router.navigate(['/sudokuf','F']);
   }
 
 }

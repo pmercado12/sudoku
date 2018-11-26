@@ -1,0 +1,15 @@
+.borde-lateral{
+    border-left: 2px solid #28a745;
+}
+
+.borde-tabla{
+    border:3px solid #28a745;
+}
+
+.borde-horizontal{
+    border-top:2px solid #28a745;
+}
+
+.fondo-celda{
+    background-color: #C4F6B1;
+}

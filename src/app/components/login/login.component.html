@@ -1,2 +1,10 @@
-<input type="text" class="form-control" placeholder="Usuario" [(ngModel)]="usuario">
-<button class="btn btn-primary" type="button" (click)="ingresar()">Ingresar</button>
+<div class="text-center">
+    <form class="form-signin" (ngSubmit)="ingresar()" #loginForm="ngForm">
+        <h1 class="h3 mb-3 font-weight-normal">Sudoku</h1>
+        <label for="inputUsuario" class="sr-only">Email address</label>
+        <input type="email" id="inputUsuario" name="usuario" class="form-control" placeholder="Nombre de Usuario" [(ngModel)]="usuario" required autofocus>
+        <br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!loginForm.form.valid">Ingresar</button>
+        <p class="mt-5 mb-3 text-muted">&copy; Sudoku-PAMM-KESC</p>
+    </form>
+</div>

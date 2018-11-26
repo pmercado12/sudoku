@@ -7,7 +7,9 @@ import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },  
-  { path: 'sudoku', component: SudokuComponent },  
+  { path: 'sudokuf/:nivel', component: SudokuComponent },
+  { path: 'sudokum/:nivel', component: SudokuComponent },
+  { path: 'sudokuc/:nivel', component: SudokuComponent },
   { path: 'sudoku-tutorial', component: SudokuTutorialComponent }
 ];
 
