@@ -1,0 +1,74 @@
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+      <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action">Nueva Partida</a>
+        <a href="#" class="list-group-item list-group-item-action">Historial</a>
+        <a href="#" class="list-group-item list-group-item-action">Tutorial</a>
+        <a href="#" class="list-group-item list-group-item-action">Salir</a>
+      </div>
+
+      <div class="btn-group btn-group-vertical" role="group" aria-label="Button group with nested dropdown">
+        <div class="btn-group" role="group">
+          <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            Dropdown
+          </button>
+          <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+            <a class="dropdown-item" href="#">Facil</a>
+            <a class="dropdown-item" href="#">Mediano</a>
+          </div>
+        </div>
+        <button type="button" class="btn btn-secondary">Historial</button>
+        <button type="button" class="btn btn-secondary">Tutorial</button>
+        <button type="button" class="btn btn-secondary">Salir</button>
+      </div>
+
+
+      <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+          <button type="button" class="btn btn-secondary">1</button>
+          <button type="button" class="btn btn-secondary">2</button>
+        
+          <div class="btn-group" role="group">
+            <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Dropdown
+            </button>
+            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+              <a class="dropdown-item" href="#">Dropdown link</a>
+              <a class="dropdown-item" href="#">Dropdown link</a>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="col-6">
+      Seleccione:
+      <sudoku-toolbar #sudoToolbar></sudoku-toolbar>
+      <br>
+      <table class="table table-bordered">
+        <thead></thead>
+        <tbody>
+
+          <tr *ngFor="let juego of juegoActual.valores; let i = index">
+            <ng-container *ngFor="let columna of juego; let j = index">
+              <ng-container *ngIf="juegoOriginal.valores[i][j]!=0; else celdaHabilitada">
+                <td>
+                  {{columna}}
+                </td>
+              </ng-container>
+              <ng-template #celdaHabilitada class="text-danger">
+                <td (click)="pintarCelda(i,j)" class="font-weight-bold">
+                  {{columna == 0 ? '' : columna}}
+                </td>
+              </ng-template>
+            </ng-container>
+
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <button type="button" class="btn btn-primary" (click)="terminar()">Terminar</button>
+    </div>
+  </div>
+</div>
