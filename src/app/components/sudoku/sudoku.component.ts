@@ -1,7 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SudokuMap } from '../../model/sudoku-map';
 import { SudokuToolbarComponent } from '../sudoku-toolbar/sudoku-toolbar.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ApiService } from '../../services/api.service';
+import { LoginService } from '../../services/login.service';
+import { Usuario } from '../../model/usuario';
 
 
 @Component({
@@ -15,17 +18,25 @@ export class SudokuComponent implements OnInit {
   private juegoOriginal: SudokuMap;
   private nivel: string;
   private descripcionNivel: string;
+  private usuarioActual: Usuario;
 
   @ViewChild("sudoToolbar")
   private sudokuToolbar: SudokuToolbarComponent;
 
   constructor(
-    private route: ActivatedRoute
+    private router: Router,
+    private route: ActivatedRoute,
+    private loginService: LoginService
   ) {
 
   }
 
   ngOnInit() {
+    this.usuarioActual = this.loginService.getUsuarioActual();
+    if (!this.usuarioActual) {
+      this.router.navigate(['/']);
+    }
+
     this.nivel = this.route.snapshot.params.nivel;
     if (this.nivel == 'F') {
       this.descripcionNivel = 'Facil';
