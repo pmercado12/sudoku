@@ -9,6 +9,7 @@ export class LoginService {
 
   private usuarioRecurso: string = 'usuarios';
   private usuarioSesionRecurso: string = 'usuariosesion';
+  private sesionIniciada: boolean = false;
 
   constructor(private apiService: ApiService) {
 
@@ -24,6 +25,9 @@ export class LoginService {
       this.apiService.postRecursoLista(this.usuarioRecurso, usuarioNuevo);
     }
     this.apiService.postRecurso(this.usuarioSesionRecurso, usuarioNuevo);
+
+    //iniciar session
+    this.sesionIniciada = true;
     return usuarioNuevo;
   }
 
@@ -41,4 +45,10 @@ export class LoginService {
     return this.apiService.getRecurso(this.usuarioSesionRecurso);
   }
 
+  public estaConectado(): boolean {
+    if (this.apiService.getRecurso(this.usuarioSesionRecurso)) {
+      return true;
+    }
+    return false;
+  }
 }

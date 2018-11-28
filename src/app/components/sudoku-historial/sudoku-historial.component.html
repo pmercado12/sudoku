@@ -1,0 +1,33 @@
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+      <menu></menu>
+    </div>
+    <div class="col-6">
+      <table class="table table-bordered table-sm borde-tabla">
+        <thead>
+          <tr>
+            <th>
+            </th>
+            <th>Nombre</th>
+            <th>Nivel</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let juego of historial">
+            <td>
+              <button type="button" class="btn btn-sm btn-success" (click)="cargar()">Cargar</button>              
+              <button type="button" class="btn btn-sm btn-default" (click)="eliminar()">Eliminar</button>
+            </td>
+            <td>{{juego.nombre}}</td>
+            <td>{{juego.juegoOriginal.nivel}}</td>
+            <td>{{juego.fecha | date:('dd/MM/yyyy')}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <datos-usuario></datos-usuario>
+  </div>
+</div>

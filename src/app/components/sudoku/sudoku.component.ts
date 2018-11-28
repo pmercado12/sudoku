@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { LoginService } from '../../services/login.service';
 import { Usuario } from '../../model/usuario';
+import { SudokuHistorialService } from 'src/app/services/sudoku-historial.service';
+import { SudokuHistorial } from 'src/app/model/sudoku-historial';
 
 
 @Component({
@@ -18,7 +20,7 @@ export class SudokuComponent implements OnInit {
   private juegoOriginal: SudokuMap;
   private nivel: string;
   private descripcionNivel: string;
-  private usuarioActual: Usuario;
+
 
   @ViewChild("sudoToolbar")
   private sudokuToolbar: SudokuToolbarComponent;
@@ -26,14 +28,14 @@ export class SudokuComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private sudokuHistorialService: SudokuHistorialService
   ) {
 
   }
 
   ngOnInit() {
-    this.usuarioActual = this.loginService.getUsuarioActual();
-    if (!this.usuarioActual) {
+    if (!this.loginService.estaConectado()) {
       this.router.navigate(['/']);
     }
 
@@ -54,7 +56,7 @@ export class SudokuComponent implements OnInit {
   }
 
   private getMapaSudoku(): SudokuMap {
-    return new SudokuMap(3, [
+    return new SudokuMap(3, "F", [
       [1, 4, 2, 0, 9, 0, 0, 0, 5],
       [7, 0, 0, 4, 0, 0, 0, 8, 9],
       [8, 0, 5, 0, 0, 0, 0, 2, 4],
@@ -80,6 +82,14 @@ export class SudokuComponent implements OnInit {
 
   private pintarCelda(i: number, j: number): void {
     this.juegoActual.valores[i][j] = this.sudokuToolbar.getNroSeleccionado();
+  }
+
+  private guardar() {
+    let sudokuHistorial = new SudokuHistorial();
+    sudokuHistorial.juegoActual = this.juegoActual;
+    sudokuHistorial.juegoOriginal = this.juegoOriginal;
+
+    this.sudokuHistorialService.crearHistorial(sudokuHistorial);
   }
 
   private terminar(): void {

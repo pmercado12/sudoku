@@ -28,6 +28,10 @@ export class ApiService {
   public postRecursoLista(recurso: string, data: any): void {
 
     let lista: any[] = JSON.parse(localStorage.getItem(recurso));
+    if (!lista) {
+      this.initRecurso(recurso);
+      lista = [];
+    }
     lista.push(data);
     localStorage.setItem(recurso, JSON.stringify(lista));
   }

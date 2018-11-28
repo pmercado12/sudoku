@@ -8,6 +8,9 @@ import { SudokuComponent } from './components/sudoku/sudoku.component';
 import { SudokuTutorialComponent } from './components/sudoku-tutorial/sudoku-tutorial.component';
 import { LoginComponent } from './components/login/login.component';
 import { SudokuToolbarComponent } from './components/sudoku-toolbar/sudoku-toolbar.component';
+import { SudokuHistorialComponent } from './components/sudoku-historial/sudoku-historial.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { DatosUsuarioComponent } from './components/datos-usuario/datos-usuario.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +18,10 @@ import { SudokuToolbarComponent } from './components/sudoku-toolbar/sudoku-toolb
     SudokuComponent,
     SudokuTutorialComponent,
     LoginComponent,
-    SudokuToolbarComponent
+    SudokuToolbarComponent,
+    SudokuHistorialComponent,
+    MenuComponent,
+    DatosUsuarioComponent
   ],
   imports: [
     BrowserModule,

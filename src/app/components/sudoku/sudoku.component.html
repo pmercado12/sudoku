@@ -2,29 +2,14 @@
 <div class="container">
   <div class="row">
     <div class="col-3">
-      <div class="btn-group btn-group-vertical" role="group" aria-label="Button group with nested dropdown">
-        <div class="btn-group" role="group">
-          <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">
-            Nueva Partida
-          </button>
-          <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-            <a class="dropdown-item" routerLink="/sudokuf/F">Facil</a>
-            <a class="dropdown-item" routerLink="/sudokum/M">Medio</a>
-            <a class="dropdown-item" routerLink="/sudokuc/C">Complejo</a>
-          </div>
-        </div>
-        <button type="button" class="btn btn-secondary" routerLink="/historial">Historial</button>
-        <button type="button" class="btn btn-secondary" routerLink="/tutorial">Tutorial</button>
-        <button type="button" class="btn btn-secondary" routerLink="/">Salir</button>
-      </div>
+      <menu></menu>
     </div>
 
     <div class="col-6">
       <b>Nivel:</b>
       {{descripcionNivel}}
-      <br/>
-      <br/> Seleccione el n&uacute;mero:
+      <br />
+      <br /> Seleccione el n&uacute;mero:
       <sudoku-toolbar #sudoToolbar></sudoku-toolbar>
       <br>
       <table class="table table-bordered table-sm borde-tabla">
@@ -40,7 +25,7 @@
               <ng-template #celdaHabilitada class="text-danger">
                 <td align="center" (click)="pintarCelda(i,j)" class="font-weight-bold" [ngClass]="{'borde-lateral': j%juegoOriginal.longitud == 0,'borde-horizontal': i%juegoOriginal.longitud == 0 }">
                   <h5>{{columna == 0 ? '' : columna}}</h5>
-                  
+
                 </td>
               </ng-template>
             </ng-container>
@@ -49,10 +34,12 @@
         </tbody>
       </table>
       <br>
-      <button type="button" class="btn btn-dark" (click)="terminar()">Terminar</button>
+      <div class="text-right">
+        <button type="button" class="btn btn-default" (click)="guardar()">Guardar</button>
+        <button type="button" class="btn btn-dark" (click)="terminar()">Terminar</button>
+      </div>
+
     </div>
-    <div>
-      Usuario: @{{usuarioActual.usuario}}
-    </div>
+    <datos-usuario></datos-usuario>
   </div>
 </div>
