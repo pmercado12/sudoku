@@ -43,12 +43,34 @@ export class SudokuHistorialService {
 
   public eliminarHistorial(sudokuHistorial: SudokuHistorial) {
     let lista: SudokuHistorial[] = this.apiService.getRecursoLista(this.sudokuHistorialRecurso);
-    let nuevaLista: SudokuHistorial[] = [];    
+    let nuevaLista: SudokuHistorial[] = [];
     for (let i = 0; i < lista.length; i++) {
       if (lista[i].idHistorial != sudokuHistorial.idHistorial) {
         nuevaLista.push(lista[i]);
       }
     }
     this.apiService.postRecurso(this.sudokuHistorialRecurso, nuevaLista);
+  }
+
+  public getHistorial(idHistorial: number): SudokuHistorial {
+    let lista: SudokuHistorial[] = this.apiService.getRecursoLista(this.sudokuHistorialRecurso);
+    let respuesta: SudokuHistorial;
+    for (let i = 0; i < lista.length; i++) {
+      if (lista[i].idHistorial == idHistorial) {
+        respuesta = lista[i];
+        break;
+      }
+    }
+    return respuesta;
+  }
+
+  public actualizaHistorial(sudokuHistorial: SudokuHistorial) {
+    let lista: SudokuHistorial[] = this.apiService.getRecursoLista(this.sudokuHistorialRecurso);    
+    for (let i = 0; i < lista.length; i++) {
+      if (lista[i].idHistorial == sudokuHistorial.idHistorial) {
+        lista[i].juegoActual = sudokuHistorial.juegoActual;
+      }
+    }
+    this.apiService.postRecurso(this.sudokuHistorialRecurso, lista);
   }
 }

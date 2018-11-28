@@ -20,6 +20,8 @@ export class SudokuComponent implements OnInit {
   private juegoOriginal: SudokuMap;
   private nivel: string;
   private descripcionNivel: string;
+  private idHistorial: number;
+  private sudokuHistorial: SudokuHistorial;
 
 
   @ViewChild("sudoToolbar")
@@ -39,7 +41,22 @@ export class SudokuComponent implements OnInit {
       this.router.navigate(['/']);
     }
 
-    this.nivel = this.route.snapshot.params.nivel;
+    if (this.route.snapshot.params.nivel) {
+      this.nivel = this.route.snapshot.params.nivel;
+      this.juegoActual = this.getMapaSudoku();
+      this.juegoOriginal = this.getMapaSudoku();
+    } else {
+      //historial
+      this.idHistorial = this.route.snapshot.params.idHistorial;
+      this.sudokuHistorial = this.sudokuHistorialService.getHistorial(this.idHistorial);
+      this.juegoActual = this.sudokuHistorial.juegoActual;
+      this.juegoOriginal = this.sudokuHistorial.juegoOriginal;
+      this.nivel = this.sudokuHistorial.juegoOriginal.nivel;
+    }
+    this.setNivel();
+  }
+
+  private setNivel() {
     if (this.nivel == 'F') {
       this.descripcionNivel = 'Facil';
     }
@@ -49,10 +66,6 @@ export class SudokuComponent implements OnInit {
     else {
       this.descripcionNivel = 'Complejo';
     }
-
-    this.juegoActual = this.getMapaSudoku();
-    this.juegoOriginal = this.getMapaSudoku();
-
   }
 
   private getMapaSudoku(): SudokuMap {
@@ -85,11 +98,16 @@ export class SudokuComponent implements OnInit {
   }
 
   private guardar() {
-    let sudokuHistorial = new SudokuHistorial();
-    sudokuHistorial.juegoActual = this.juegoActual;
-    sudokuHistorial.juegoOriginal = this.juegoOriginal;
+    if (this.idHistorial) {
+      this.sudokuHistorial.juegoActual = this.juegoActual;
+      this.sudokuHistorialService.actualizaHistorial(this.sudokuHistorial);
+    } else {
+      let sudokuHistorial = new SudokuHistorial();
+      sudokuHistorial.juegoActual = this.juegoActual;
+      sudokuHistorial.juegoOriginal = this.juegoOriginal;
+      this.sudokuHistorialService.crearHistorial(sudokuHistorial);
+    }
 
-    this.sudokuHistorialService.crearHistorial(sudokuHistorial);
     alert("La partida ha sido guardada");
   }
 

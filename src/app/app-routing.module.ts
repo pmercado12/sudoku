@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'sudokuf/:nivel', component: SudokuComponent },
   { path: 'sudokum/:nivel', component: SudokuComponent },
   { path: 'sudokuc/:nivel', component: SudokuComponent },
+  { path: 'sudokucarga/:idHistorial', component: SudokuComponent },
   { path: 'sudoku-tutorial', component: SudokuTutorialComponent },
   { path: 'sudoku-historial', component: SudokuHistorialComponent }
 ];
