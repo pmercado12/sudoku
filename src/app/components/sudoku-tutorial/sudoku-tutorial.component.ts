@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sudoku-tutorial.component.css']
 })
 export class SudokuTutorialComponent implements OnInit {
-
+  pdfSrc: string = './assets/ManualSUDOKU.pdf';
   constructor() { }
 
   ngOnInit() {

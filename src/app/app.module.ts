@@ -11,6 +11,7 @@ import { SudokuToolbarComponent } from './components/sudoku-toolbar/sudoku-toolb
 import { SudokuHistorialComponent } from './components/sudoku-historial/sudoku-historial.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { DatosUsuarioComponent } from './components/datos-usuario/datos-usuario.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { DatosUsuarioComponent } from './components/datos-usuario/datos-usuario.
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PdfViewerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
