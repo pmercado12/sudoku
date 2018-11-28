@@ -90,31 +90,31 @@ export class SudokuComponent implements OnInit {
     sudokuHistorial.juegoOriginal = this.juegoOriginal;
 
     this.sudokuHistorialService.crearHistorial(sudokuHistorial);
+    alert("La partida ha sido guardada");
   }
 
   private terminar(): void {
     if (!this.validar()) {
-      console.log("hubo un error");
       return;
     }
-    console.log("felicidades");
+    alert("Felicidades ha concluido con el sudoku!!!");
   }
 
   private validar(): boolean {
     if (!this.estaCompleto()) {
-      console.log("El juego no esta completo");
+      alert("El juego no esta completo");
       return false;
     }
     if (!this.validarFilas()) {
-      console.log("El juego tiene error en filas");
+      alert("El juego tiene error en filas");
       return false;
     }
     if (!this.validarColumnas()) {
-      console.log("El juego tiene error en columnas");
+      alert("El juego tiene error en columnas");
       return false;
     }
     if (!this.validarRecuadros()) {
-      console.log("El juego tiene error en recuadros");
+      alert("El juego tiene error en recuadros");
       return false;
     }
     return true;

@@ -18,4 +18,9 @@ export class SudokuHistorialComponent implements OnInit {
   private getHistorialUsuario(): void {
     this.historial = this.sudokuHistorialService.getHistorialUsuario();
   }
+
+  private eliminar(sudokuHistorial: SudokuHistorial): void {
+    this.sudokuHistorialService.eliminarHistorial(sudokuHistorial);
+    this.getHistorialUsuario();
+  }
 }

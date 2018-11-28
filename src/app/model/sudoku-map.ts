@@ -5,6 +5,7 @@ export class SudokuMap {
 
     constructor(longitud: number, nivel: string, valores: Array<Array<number>>) {
         this.longitud = longitud;
+        this.nivel = nivel;
         this.valores = valores;
     }
 }

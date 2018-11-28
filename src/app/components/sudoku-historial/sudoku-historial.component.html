@@ -19,7 +19,7 @@
           <tr *ngFor="let juego of historial">
             <td>
               <button type="button" class="btn btn-sm btn-success" (click)="cargar()">Cargar</button>              
-              <button type="button" class="btn btn-sm btn-default" (click)="eliminar()">Eliminar</button>
+              <button type="button" class="btn btn-sm btn-default" (click)="eliminar(juego)">Eliminar</button>
             </td>
             <td>{{juego.nombre}}</td>
             <td>{{juego.juegoOriginal.nivel}}</td>
