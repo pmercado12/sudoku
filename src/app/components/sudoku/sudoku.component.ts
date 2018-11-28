@@ -7,6 +7,7 @@ import { LoginService } from '../../services/login.service';
 import { Usuario } from '../../model/usuario';
 import { SudokuHistorialService } from 'src/app/services/sudoku-historial.service';
 import { SudokuHistorial } from 'src/app/model/sudoku-historial';
+import { SudokuService } from 'src/app/services/sudoku.service';
 
 
 @Component({
@@ -31,7 +32,8 @@ export class SudokuComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private loginService: LoginService,
-    private sudokuHistorialService: SudokuHistorialService
+    private sudokuHistorialService: SudokuHistorialService,
+    private sudokuService: SudokuService
   ) {
 
   }
@@ -43,14 +45,23 @@ export class SudokuComponent implements OnInit {
 
     if (this.route.snapshot.params.nivel) {
       this.nivel = this.route.snapshot.params.nivel;
-      this.juegoActual = this.getMapaSudoku();
-      this.juegoOriginal = this.getMapaSudoku();
+      this.juegoOriginal = this.sudokuService.getJuego(this.nivel);
+
+      let valoresAux = [];
+
+      for (var i = 0; i < this.juegoOriginal.valores.length; i++)
+        valoresAux[i] = this.juegoOriginal.valores[i].slice();
+
+      this.juegoActual = new SudokuMap(
+        this.juegoOriginal.longitud,
+        this.juegoOriginal.nivel,
+        valoresAux);
     } else {
       //historial
       this.idHistorial = this.route.snapshot.params.idHistorial;
       this.sudokuHistorial = this.sudokuHistorialService.getHistorial(this.idHistorial);
-      this.juegoActual = this.sudokuHistorial.juegoActual;
       this.juegoOriginal = this.sudokuHistorial.juegoOriginal;
+      this.juegoActual = this.sudokuHistorial.juegoActual;
       this.nivel = this.sudokuHistorial.juegoOriginal.nivel;
     }
     this.setNivel();
@@ -68,7 +79,7 @@ export class SudokuComponent implements OnInit {
     }
   }
 
-  private getMapaSudoku(): SudokuMap {
+  /*private getMapaSudoku(): SudokuMap {
     return new SudokuMap(3, "F", [
       [1, 4, 2, 0, 9, 0, 0, 0, 5],
       [7, 0, 0, 4, 0, 0, 0, 8, 9],
@@ -80,18 +91,7 @@ export class SudokuComponent implements OnInit {
       [0, 2, 8, 0, 0, 9, 4, 1, 0],
       [0, 7, 9, 1, 0, 8, 5, 3, 0]
     ]);
-    /*return new SudokuMap(3, [
-      [1, 4, 2, 8, 9, 3, 6, 7, 5],
-      [7, 6, 3, 4, 2, 5, 1, 8, 9],
-      [8, 9, 5, 6, 1, 7, 3, 2, 4],
-      [2, 1, 7, 9, 6, 4, 8, 5, 3],
-      [9, 3, 4, 5, 8, 1, 2, 6, 7],
-      [5, 8, 6, 3, 7, 2, 9, 4, 1],
-      [4, 5, 1, 2, 3, 6, 7, 9, 8],
-      [3, 2, 8, 7, 5, 9, 4, 1, 6],
-      [6, 7, 9, 1, 4, 8, 5, 3, 2]
-    ]);*/
-  }
+}*/
 
   private pintarCelda(i: number, j: number): void {
     this.juegoActual.valores[i][j] = this.sudokuToolbar.getNroSeleccionado();
